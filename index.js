@@ -6,6 +6,7 @@ var bot = undefined
 var TwitterBot = function (KEY) {
   bot = new twitter(KEY)
   EventEmitter.call(this);
+  util.inherits(TwitterBot, EventEmitter);
 }
 util.inherits(TwitterBot, EventEmitter);
 TwitterBot.prototype.createTweet = (text, timeout, callback) => {
@@ -27,6 +28,7 @@ TwitterBot.prototype.createTweet = (text, timeout, callback) => {
 TwitterBot.prototype.tweet = (text) => {
   bot.post('statuses/update', {status: text},  function(error, tweet, response){
     if(error){}
+    this.emit('updated', text)
   });
 }
 TwitterBot.prototype.removeTweet = (id) => {
