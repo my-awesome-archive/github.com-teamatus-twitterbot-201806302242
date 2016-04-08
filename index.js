@@ -25,7 +25,7 @@ TwitterBot.prototype.removeTweet = (id) => {
   clearTimeout(id)
 }
 TwitterBot.prototype.recive = (text) => {
-  client.stream('statuses/filter', {track: text}, (stream) => {
+  bot.stream('statuses/filter', {track: text}, (stream) => {
     stream.on('data', (tweet) => {
       this.emit('data', tweet)
     });
