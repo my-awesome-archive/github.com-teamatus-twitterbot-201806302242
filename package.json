@@ -15,5 +15,14 @@
   "license": "MIT",
   "dependencies": {
     "twitter": "^1.2.5"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teamatus/twitterbot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/teamatus/twitterbot/issues"
+  },
+  "homepage": "https://github.com/teamatus/twitterbot#readme"
 }
