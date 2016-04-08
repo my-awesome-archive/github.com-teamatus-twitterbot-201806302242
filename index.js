@@ -9,9 +9,17 @@ var TwitterBot = function (KEY) {
 }
 util.inherits(TwitterBot, EventEmitter);
 TwitterBot.prototype.createTweet = (text, timeout, callback) => {
+  var lastError = undefined
   var id = setTimeout(() => {
     bot.post('statuses/update', {status: text},  function(error, tweet, response){
-      if(error) callback(error)
+      if(lastError && lastError[0].code == 182) text += " "
+      if(error) {
+        callback(error)
+        lastError = error
+      }else{
+        lastError = undefined
+      }
+      //
     });
   }, timeout);
   callback(undefined, id)
