@@ -1,0 +1,19 @@
+{
+  "name": "twitterbot",
+  "version": "1.0.2",
+  "description": "Twitter simple bot warpper.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "twitbot",
+    "twitter",
+    "bot"
+  ],
+  "author": "BasixKOR",
+  "license": "MIT",
+  "dependencies": {
+    "twitter": "^1.2.5"
+  }
+}
