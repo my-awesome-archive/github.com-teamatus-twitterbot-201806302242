@@ -10,14 +10,14 @@ var TwitterBot = function (KEY) {
 util.inherits(TwitterBot, EventEmitter);
 TwitterBot.prototype.createTweet = (text, timeout, callback) => {
   var id = setTimeout(() => {
-    client.post('statuses/update', {status: text},  function(error, tweet, response){
+    bot.post('statuses/update', {status: text},  function(error, tweet, response){
       if(error) callback(error)
     });
   }, timeout);
   callback(undefined, id)
 }
 TwitterBot.prototype.tweet = (text) => {
-  client.post('statuses/update', {status: text},  function(error, tweet, response){
+  bot.post('statuses/update', {status: text},  function(error, tweet, response){
     if(error){}
   });
 }
