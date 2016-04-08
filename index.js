@@ -16,6 +16,11 @@ TwitterBot.prototype.createTweet = (text, timeout, callback) => {
   }, timeout);
   callback(undefined, id)
 }
+TwitterBot.prototype.tweet = (text) => {
+  client.post('statuses/update', {status: text},  function(error, tweet, response){
+    if(error){}
+  });
+}
 TwitterBot.prototype.removeTweet = (id) => {
   clearTimeout(id)
 }
