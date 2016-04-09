@@ -1,13 +1,12 @@
 var twitter = require('twitter');
 const util = require('util');
 const EventEmitter = require('events');
-var _this_ = this
 
 var bot = undefined
+var self = this
 var TwitterBot = function (KEY) {
   bot = new twitter(KEY)
   EventEmitter.call(this);
-  util.inherits(TwitterBot, EventEmitter);
 }
 util.inherits(TwitterBot, EventEmitter);
 TwitterBot.prototype.createTweet = (text, timeout, callback) => {
@@ -21,7 +20,7 @@ TwitterBot.prototype.createTweet = (text, timeout, callback) => {
       }else{
         lastError = undefined
       }
-      _this_.emit('updated', text)
+      //
     });
   }, timeout);
   callback(undefined, id)
@@ -29,7 +28,7 @@ TwitterBot.prototype.createTweet = (text, timeout, callback) => {
 TwitterBot.prototype.tweet = (text) => {
   bot.post('statuses/update', {status: text},  function(error, tweet, response){
     if(error){}
-    _this_.emit('updated', text)
+    self.emit('updated', text)
   });
 }
 TwitterBot.prototype.removeTweet = (id) => {
@@ -38,10 +37,10 @@ TwitterBot.prototype.removeTweet = (id) => {
 TwitterBot.prototype.recive = (text) => {
   bot.stream('statuses/filter', {track: text}, (stream) => {
     stream.on('data', (tweet) => {
-      _this_.emit('data', tweet)
+      self.emit('data', tweet)
     });
     stream.on('error', (error) => {
-      _this_.emit('error', error)
+      self.emit('error', error)
     });
   });
 }
