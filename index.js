@@ -10,6 +10,7 @@ var TwitterBot = function (KEY) {
 }
 util.inherits(TwitterBot, EventEmitter);
 TwitterBot.prototype.createTweet = (text, timeout, callback) => {
+  var self = this
   var lastError = undefined
   if(lastError && lastError[0].code == 182) text += " "
   var id = setTimeout(() => {
@@ -19,6 +20,7 @@ TwitterBot.prototype.createTweet = (text, timeout, callback) => {
         lastError = error
       }else{
         lastError = undefined
+        self.emit('updated', text)
       }
       //
     });
@@ -26,6 +28,7 @@ TwitterBot.prototype.createTweet = (text, timeout, callback) => {
   callback(undefined, id)
 }
 TwitterBot.prototype.tweet = (text) => {
+  var self = this
   bot.post('statuses/update', {status: text},  function(error, tweet, response){
     if(error){}
     self.emit('updated', text)
@@ -35,6 +38,7 @@ TwitterBot.prototype.removeTweet = (id) => {
   clearTimeout(id)
 }
 TwitterBot.prototype.recive = (text) => {
+  var self = this
   bot.stream('statuses/filter', {track: text}, (stream) => {
     stream.on('data', (tweet) => {
       self.emit('data', tweet)
