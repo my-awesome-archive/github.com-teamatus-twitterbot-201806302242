@@ -15,7 +15,7 @@ TwitterBot.prototype.createTweet = (text, timeout, callback) => {
   var self = this
   var lastError = undefined
   if(lastError && lastError[0].code == 182) text += " "
-  var id = setTimeout(() => {
+  var id = setInterval(() => {
     bot.post('statuses/update', {status: text},  function(error, tweet, response){
       if(error) {
         callback(error)
@@ -37,7 +37,7 @@ TwitterBot.prototype.tweet = (text) => {
   });
 }
 TwitterBot.prototype.removeTweet = (id) => {
-  clearTimeout(id)
+  clearInterval(id)
 }
 TwitterBot.prototype.recive = (text) => {
   var self = this

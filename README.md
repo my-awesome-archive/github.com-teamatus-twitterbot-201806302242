@@ -3,6 +3,7 @@
 
 [![npm](https://img.shields.io/npm/dt/twitterbot.svg?style=flat-square)](https://www.npmjs.com/package/twitterbot) [![npm](https://img.shields.io/npm/l/twitterbot.svg?style=flat-square)](https://www.npmjs.com/package/twitterbot)
 [![management](https://img.shields.io/badge/management-Atus-blue.svg?style=flat-square)](http://www.atus.ml)
+[![label](https://img.shields.io/github/issues-raw/badges/teamatus/twitterbot.svg?style=flat-square)](https://github.com/teamatus/twitterbot)
 
 This is Twitter Warpper for develop your own bot on twitter. on now, this project use timer built-in timer, so **callback time is not accurate**. 0.5 to 1 second late or may be faster.
 
@@ -44,5 +45,5 @@ bot.on('tweet', (data) => { // Recived Tweet contains "nodejs"
 })
 ```
 ## Why `twitterbot`
- * No message 'Status is a duplicate.'
-  * This will automatically add space to avoid the filter. (experimental)
+* No message 'Status is a duplicate.'
+ * This will automatically add space to avoid the filter. (experimental)
