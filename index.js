@@ -37,10 +37,10 @@ TwitterBot.prototype.removeTweet = (id) => {
 TwitterBot.prototype.recive = (text) => {
   bot.stream('statuses/filter', {track: text}, (stream) => {
     stream.on('data', (tweet) => {
-      this.emit('data', tweet)
+      self.emit('data', tweet)
     });
     stream.on('error', (error) => {
-      this.emit('error', error)
+      self.emit('error', error)
     });
   });
 }
