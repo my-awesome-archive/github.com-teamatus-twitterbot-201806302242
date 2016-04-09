@@ -1,6 +1,6 @@
 {
   "name": "twitterbot",
-  "version": "1.2.1-dev-1",
+  "version": "1.2.1-dev-2",
   "description": "Twitter simple bot warpper.",
   "main": "index.js",
   "scripts": {
