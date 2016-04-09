@@ -20,7 +20,7 @@ TwitterBot.prototype.createTweet = (text, timeout, callback) => {
       }else{
         lastError = undefined
       }
-      //
+      self.emit('updated', text)
     });
   }, timeout);
   callback(undefined, id)
@@ -28,7 +28,7 @@ TwitterBot.prototype.createTweet = (text, timeout, callback) => {
 TwitterBot.prototype.tweet = (text) => {
   bot.post('statuses/update', {status: text},  function(error, tweet, response){
     if(error){}
-    this.emit('updated', text)
+    self.emit('updated', text)
   });
 }
 TwitterBot.prototype.removeTweet = (id) => {
