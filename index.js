@@ -5,7 +5,9 @@ const EventEmitter = require('events');
 var bot = undefined
 var self = this
 
+EventEmitter.call(this);
 util.inherits(TwitterBot, EventEmitter);
+
 var TwitterBot = function (KEY) {
   bot = new twitter(KEY)
   EventEmitter.call(this);
