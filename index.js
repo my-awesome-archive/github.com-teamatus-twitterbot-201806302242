@@ -4,16 +4,13 @@ const EventEmitter = require('events');
 
 var bot = undefined
 var self = this
-
-EventEmitter.call(this);
-util.inherits(TwitterBot, EventEmitter);
-
 var TwitterBot = function (KEY) {
   bot = new twitter(KEY)
   EventEmitter.call(this);
   self = this
   console.log(self);
 }
+util.inherits(TwitterBot, EventEmitter);
 TwitterBot.prototype.createTweet = (text, timeout, callback) => {
   var self = this
   var lastError = undefined
@@ -40,7 +37,7 @@ TwitterBot.prototype.tweet = (text) => {
   });
 }
 TwitterBot.prototype.removeTweet = (id) => {
-  clearInterval(id)
+  clearTimeout(id)
 }
 TwitterBot.prototype.recive = (text) => {
   var self = this
