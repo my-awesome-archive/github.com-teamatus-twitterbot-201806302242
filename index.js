@@ -7,7 +7,7 @@ var self = this
 var TwitterBot = function (KEY) {
   bot = new twitter(KEY)
   EventEmitter.call(this);
-  console.log(self);
+  self = this
 }
 util.inherits(TwitterBot, EventEmitter);
 TwitterBot.prototype.createTweet = (text, timeout, callback) => {
