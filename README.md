@@ -44,5 +44,5 @@ bot.on('tweet', (data) => { // Recived Tweet contains "nodejs"
 })
 ```
 ## Why `twitterbot`
-* No message 'Status is a duplicate.'
- * This will automatically add space to avoid the filter. (experimental)
+ * No message 'Status is a duplicate.'
+  * This will automatically add space to avoid the filter. (experimental)
