@@ -23,7 +23,7 @@ bot.createTweet("Hello, World!", 3000, (err, id) => {
 
   doSomething()
 
-  twbot.removeTweet(id) // "Hello, World!" will not tweeted anymore.
+  bot.removeTweet(id) // "Hello, World!" will not tweeted anymore.
   // Tweet has already been created will NOT BE REMOVED.
 })
 ```
@@ -40,10 +40,22 @@ bot.recive("nodejs")
 bot.on('error', (err) => {
   throw err;
 })
-bot.on('tweet', (data) => { // Recived Tweet contains "nodejs"
+bot.on('recived', (data) => { // Recived Tweet contains "nodejs".
   console.log(data.text)
 })
 ```
 ## Why `twitterbot`
-* No message 'Status is a duplicate.'
- * This will automatically add space to avoid the filter. (experimental)
+ * No message 'Status is a duplicate.'
+  * This will automatically add space to avoid the filter. (experimental)
+
+## API
+### bot
+#### event
+ * recived (tweet)
+ * error (err)
+ * upadted (plainText)
+### function
+ * createTweet(text, timeout, callback(err, id))
+ * removeTweet(id)
+ * recive(text)
+ * tweet(text)

@@ -1,6 +1,6 @@
 {
   "name": "twitterbot",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Twitter simple bot warpper.",
   "main": "index.js",
   "scripts": {
@@ -24,5 +24,6 @@
   "bugs": {
     "url": "https://github.com/teamatus/twitterbot/issues"
   },
-  "homepage": "https://github.com/teamatus/twitterbot#readme"
+  "homepage": "https://github.com/teamatus/twitterbot#readme",
+  "tonicExampleFilename": "example.js"
 }
