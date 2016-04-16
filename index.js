@@ -4,16 +4,19 @@ const EventEmitter = require('events');
 
 var bot = undefined
 var self = this
+var old = false
+
 var TwitterBot = function (KEY) {
   bot = new twitter(KEY)
+  if(KEY['oldCode']) old = true
   EventEmitter.call(this);
   self = this
 }
 util.inherits(TwitterBot, EventEmitter);
 TwitterBot.prototype.createTweet = (text, timeout, callback) => {
   var lastError = undefined
-  if(lastError && lastError[0].code == 182) text+=" "
   var id = setInterval(() => {
+    if(lastError && lastError[0].code === 182) text+=" "
     bot.post('statuses/update', {status: text},  function(error, tweet, response){
       if(error) {
         self.emit('error', error)
@@ -23,7 +26,6 @@ TwitterBot.prototype.createTweet = (text, timeout, callback) => {
         lastError = undefined
         self.emit('updated', text)
       }
-      //
     });
   }, timeout);
   callback(undefined, id)
@@ -37,17 +39,62 @@ TwitterBot.prototype.tweet = (text) => {
   });
 }
 TwitterBot.prototype.removeTweet = (id) => {
-  clearTimeout(id)
+  clearInterval(id)
 }
 TwitterBot.prototype.recive = (text) => {
   bot.stream('statuses/filter', {track: text}, (stream) => {
     stream.on('data', (tweet) => {
       self.emit('recived', tweet)
-      self.emit('data', tweet) // Deperated. It'll delete on 1.3
+      if(old) self.emit('data', tweet)
     });
     stream.on('error', (error) => {
       self.emit('error', error)
     });
+  });
+}
+TwitterBot.prototype.media.createTweet = (data, text, timeout, callback) => {
+  client.post('media/upload', {media: data}, function(error, media, response){
+    if (!error) {
+
+      // Lets tweet it
+      var status = {
+        status: text,
+        media_ids: media.media_id_string // Pass the media id string
+      }
+      
+      var lastError = undefined
+      var id = setInterval(() => {
+      if(lastError && lastError[0].code === 182) text+=" "
+      bot.post('statuses/update', status,  function(error, tweet, response){
+        if(error) {
+          self.emit('error', error)
+          callback(error)
+          lastError = error
+        }else{
+          lastError = undefined
+          self.emit('updated', text)
+        }
+      });
+    }, timeout);
+    callback(undefined, id)
+  }
+  });
+}
+TwitterBot.prototype.media.tweet = (data, text) => {
+  client.post('media/upload', {media: data}, function(error, media, response){
+    if (!error) {
+      // Lets tweet it
+      var status = {
+        status: 'I am a tweet',
+        media_ids: media.media_id_string // Pass the media id string
+      }
+
+      client.post('statuses/update', status, function(error, tweet, response){
+        if(error) self.emit('error', error)
+        else self.emit('updated', text)
+      });
+
+    }
   });
 }
 
