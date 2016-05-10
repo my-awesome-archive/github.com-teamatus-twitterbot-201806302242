@@ -50,7 +50,7 @@ TwitterBot.prototype.recive = (text, id) => {
   }
   bot.stream('statuses/filter', opt, (stream) => {
     stream.on('data', (tweet) => {
-      self.emit('recived', tweet)
+      self.emit('recived', tweet, opt.track)
       if(old) self.emit('data', tweet, opt.track)
     });
     stream.on('error', (error) => {

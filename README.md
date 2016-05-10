@@ -5,7 +5,7 @@
 [![management](https://img.shields.io/badge/management-Atus-blue.svg?style=flat-square)](http://www.atus.ml)
 [![label](https://img.shields.io/github/issues-raw/badges/teamatus/twitterbot.svg?style=flat-square)](https://github.com/teamatus/twitterbot)
 
-This is Twitter Warpper for develop your own bot on twitter. on now, this project use timer built-in timer, so **callback time is not accurate**. 0.5 to 1 second late or may be faster.
+This is Twitter Warpper for develop your own bot on twitter. on now, this project use timer built-in timer, so **callback time and twitted is not accurate**. 0.5 to 1 second late or may be faster.
 
 ## Example
 ### Tweet "Hello, World!" every 3 second!
@@ -27,7 +27,7 @@ bot.createTweet("Hello, World!", 3000, (err, id) => {
   // Tweet has already been created will NOT BE REMOVED.
 })
 ```
-### Log it tweet contains "nodejs"
+### Log it tweet contains "nodejs" and steam sale.
 ```javascript
 var TwitterBot = require('twitterbot')
 var bot = new TwitterBot({
