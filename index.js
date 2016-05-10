@@ -51,7 +51,7 @@ TwitterBot.prototype.recive = (text, id) => {
   bot.stream('statuses/filter', opt, (stream) => {
     stream.on('data', (tweet) => {
       self.emit('recived', tweet)
-      if(old) self.emit('data', tweet)
+      if(old) self.emit('data', tweet, opt.track)
     });
     stream.on('error', (error) => {
       self.emit('error', error)
@@ -91,7 +91,7 @@ TwitterBot.prototype.media.tweet = (data, text) => {
     if (!error) {
       // Lets tweet it
       var status = {
-        status: 'I am a tweet',
+        status: text,
         media_ids: media.media_id_string // Pass the media id string
       }
 

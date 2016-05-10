@@ -37,10 +37,12 @@ var bot = new TwitterBot({
   access_token_secret: ''
 }) // Your Keys Here
 bot.recive("nodejs")
+bot.recive("sale", "steam_games")
 bot.on('error', (err) => {
   throw err;
 })
-bot.on('recived', (data) => { // Recived Tweet contains "nodejs".
+bot.on('recived', (data, tt) => { // Recived Tweet contains "nodejs".
+  if(tt === 'sale') console.log("sorry, steam sale something now.")
   console.log(data.text)
 })
 ```
@@ -51,7 +53,7 @@ bot.on('recived', (data) => { // Recived Tweet contains "nodejs".
 ## API
 ### bot
 #### event
- * recived (tweet)
+ * recived (tweet, trackedText)
  * error (err)
  * upadted (plainText)
 
@@ -59,7 +61,8 @@ bot.on('recived', (data) => { // Recived Tweet contains "nodejs".
  * createTweet(text, timeout, callback(err, id))
  * removeTweet(id)
  * recive(text, id)
-  * You can filter by user id, option.
+   * You can filter by user id, option.
+   * id should not contains @.
  * tweet(text)
 
 ### bot.media
