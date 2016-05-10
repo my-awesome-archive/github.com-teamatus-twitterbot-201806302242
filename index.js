@@ -29,7 +29,7 @@ TwitterBot.prototype.createTweet = (text, timeout, callback) => {
     });
   }, timeout);
   callback(undefined, id)
-}
+}g
 TwitterBot.prototype.tweet = (text) => {
   bot.post('statuses/update', {status: text},  function(error, tweet, response){
     if(error){
@@ -41,8 +41,14 @@ TwitterBot.prototype.tweet = (text) => {
 TwitterBot.prototype.removeTweet = (id) => {
   clearInterval(id)
 }
-TwitterBot.prototype.recive = (text) => {
-  bot.stream('statuses/filter', {track: text}, (stream) => {
+TwitterBot.prototype.recive = (text, id) => {
+  var opt;
+  if(follow){
+    opt = {track: text, follow: id}
+  }else{
+    opt = {track: text}
+  }
+  bot.stream('statuses/filter', opt, (stream) => {
     stream.on('data', (tweet) => {
       self.emit('recived', tweet)
       if(old) self.emit('data', tweet)
@@ -61,7 +67,7 @@ TwitterBot.prototype.media.createTweet = (data, text, timeout, callback) => {
         status: text,
         media_ids: media.media_id_string // Pass the media id string
       }
-      
+
       var lastError = undefined
       var id = setInterval(() => {
       if(lastError && lastError[0].code === 182) text+=" "

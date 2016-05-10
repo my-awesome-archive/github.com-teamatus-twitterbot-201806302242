@@ -54,13 +54,16 @@ bot.on('recived', (data) => { // Recived Tweet contains "nodejs".
  * recived (tweet)
  * error (err)
  * upadted (plainText)
+
 ### function
  * createTweet(text, timeout, callback(err, id))
  * removeTweet(id)
- * recive(text)
+ * recive(text, id)
+  * You can filter by user id, option.
  * tweet(text)
+
 ### bot.media
 #### function
  * createTweet(media, text, timeout, callback(err, id))
-  * media can be found at file like `var data = require('fs').readFileSync('image.jpg');
+  * media can be found at file like `var data require('fs').readFileSync('image.jpg')`;
  * tweet(media, text)
