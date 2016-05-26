@@ -68,5 +68,5 @@ bot.on('recived', (data, tt) => { // Recived Tweet contains "nodejs".
 ### bot.media
 #### function
  * createTweet(media, text, timeout, callback(err, id))
-  * media can be found at file like `var data require('fs').readFileSync('image.jpg')`;
+  * media can be found at file like `var data = require('fs').readFileSync('image.jpg')`;
  * tweet(media, text)
